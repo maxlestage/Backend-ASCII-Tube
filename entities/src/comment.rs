@@ -15,41 +15,23 @@ pub struct Model {
     #[sea_orm(column_name = "video_id")]
     pub video_id: i32,
     pub texte: String,
-    pub date: NaiveDate,
+    pub date: Option<NaiveDate>,
 }
 
-/*   belongs_to = "super::user::Entity",
-from = "Column:user_id",
-to = "super::user::Column::Id" */
-
-// #[derive(Copy, Clone, Debug, EnumIter)]
-// pub enum Relation {
-//     #[sea_orm(belongs_to = "super::user::Entity", from = "Column::User_id" to = "super::user::Column::Id" )]
-//     User,
-//     #[sea_orm(belongs_to = "super::video::Entity", from = "Column::User_id" to = "super::user::Column:Id")]
-//     Video,
-// }
-
-#[derive(Copy, Clone, Debug, EnumIter)]
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
+    #[sea_orm(
+        belongs_to = "super::user::Entity",
+        from = "Column::UserId",
+        to = "super::user::Column::Id"
+    )]
     User,
+    #[sea_orm(
+        belongs_to = "super::video::Entity",
+        from = "Column::VideoId",
+        to = "super::video::Column::Id"
+    )]
     Video,
-}
-
-impl RelationTrait for Relation {
-    fn def(&self) -> RelationDef {
-        match self {
-            Self::User => Entity::belongs_to(super::user::Entity)
-                .from(Column::UserId)
-                .to(super::user::Column::Id)
-                .into(),
-
-            Self::Video => Entity::belongs_to(super::user::Entity)
-                .from(Column::UserId)
-                .to(super::user::Column::Id)
-                .into(),
-        }
-    }
 }
 
 impl Related<super::user::Entity> for Comment {

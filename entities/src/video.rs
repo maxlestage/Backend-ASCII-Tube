@@ -14,47 +14,26 @@ pub struct Model {
     pub user_id: i32,
     pub titre: String,
     pub description: String,
-    pub date: NaiveDate,
+    pub date: Option<NaiveDate>,
     pub path_to_json: String,
     pub duration: i32,
 }
 
-// #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-// pub enum Relation {
-//     #[sea_orm(has_many = "super::comment::Entity")]
-//     Comments,
-//     #[sea_orm(
-//         belongs_to = "super::user::Entity",
-//         from = "Column:User_id",
-//         to = "super::user::Column::Id"
-//     )]
-//     User,
-// }
-
-#[derive(Copy, Clone, Debug, EnumIter)]
+#[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
+    #[sea_orm(
+        belongs_to = "super::user::Entity",
+        from = "Column::UserId",
+        to = "super::user::Column::Id"
+    )]
     User,
-    // Comment,
-}
-
-impl RelationTrait for Relation {
-    fn def(&self) -> RelationDef {
-        match self {
-            Self::User => Entity::belongs_to(super::user::Entity)
-                .from(Column::UserId)
-                .to(super::user::Column::Id)
-                .into(),
-            // Self::Comment => Entity::belongs_to(super::comment::Entity)
-            //     .from(Column::UserId)
-            //     .to(super::comment::Column::Id)
-            //     .into(),
-        }
-    }
+    #[sea_orm(has_many = "super::comment::Entity")]
+    Comment,
 }
 
 impl Related<super::comment::Entity> for Video {
     fn to() -> RelationDef {
-        Relation::User.def()
+        Relation::Comment.def()
     }
 }
 

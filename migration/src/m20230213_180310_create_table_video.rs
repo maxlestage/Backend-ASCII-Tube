@@ -19,7 +19,7 @@ impl MigrationTrait for Migration {
                             .auto_increment()
                             .primary_key(),
                     )
-                    .col(ColumnDef::new(Video::UserId).string().not_null())
+                    .col(ColumnDef::new(Video::UserId).integer().not_null())
                     .col(ColumnDef::new(Video::Titre).string().not_null())
                     .col(ColumnDef::new(Video::Description).string().not_null())
                     .col(ColumnDef::new(Video::Date).string().not_null())

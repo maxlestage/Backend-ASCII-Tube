@@ -20,7 +20,8 @@ impl MigrationTrait for Migration {
                             .auto_increment()
                             .primary_key(),
                     )
-                    .col(ColumnDef::new(Comment::UserId).string().not_null())
+                    .col(ColumnDef::new(Comment::UserId).integer().not_null())
+                    .col(ColumnDef::new(Comment::VideoId).integer().not_null())
                     .col(ColumnDef::new(Comment::Text).string().not_null())
                     .col(ColumnDef::new(Comment::Date).string().not_null())
                     .to_owned(),
@@ -43,6 +44,7 @@ enum Comment {
     Table,
     Id,
     UserId,
+    VideoId,
     Text,
     Date,
 }
