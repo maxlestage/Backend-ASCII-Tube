@@ -9,9 +9,6 @@ edition = "2021"
 # salvo = "*"
 # tokio = { version = "1", features = ["macros"] }
 
-
-
-
 [workspace]
 members = [".", "api", "db", "migration", "queries", "auth"]
 
