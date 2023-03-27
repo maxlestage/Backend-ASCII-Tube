@@ -40,3 +40,4 @@ pub async fn sign_up(user_input: User, res: &mut Response) {
         res.set_status_code(StatusCode::BAD_REQUEST);
     }
 }
+
