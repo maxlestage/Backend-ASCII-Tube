@@ -7,9 +7,8 @@ use salvo::{
 };
 
 #[handler]
-
 pub async fn upload(req: &mut Request, res: &mut Response) {
-    let file = req.file("file").await;
+    let file = req.file("").await;
     println!("{:#?}", file);
     if let Some(file) = file {
         let dest = format!("temp/{}", file.name().unwrap_or("file"));
