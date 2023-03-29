@@ -8,7 +8,7 @@ use salvo::{
 
 #[handler]
 pub async fn upload(req: &mut Request, res: &mut Response) {
-    let file = req.file("").await;
+    let file = req.first_file().await; // chrislearn — 29/03/2023 à 09:18 use req.first_file().await to get the uploaded file instead of req.file("").await
     if let Some(file) = file {
         let dest = format!("temp/{}", file.name().unwrap_or("file"));
         let info = if let Err(e) = std::fs::copy(&file.path(), Path::new(&dest)) {
