@@ -12,6 +12,7 @@ pub const SECRET_KEY: &str = "YOUR_SECRET_KEY_JWT_CODO_MATON_TOKEN";
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct JwtClaims {
+    id: i32,
     mail: String,
     exp: i64,
 }
@@ -30,14 +31,22 @@ pub async fn sign_in(
     res: &mut Response,
 ) -> anyhow::Result<()> {
     let db_connect: DatabaseConnection = db_connection().await.expect("Error");
+
     if req.method() == Method::POST {
         let user: User = req.extract().await.unwrap();
         let (mail, password) = (user.mail, user.password);
+        let newboxeddbconection = Box::new(db_connect);
+        let boxeddbconection = newboxeddbconection.clone();
 
-        let is_valid = validate(&mail, &password, db_connect);
+        let is_valid = validate(&mail, &password, *boxeddbconection.clone());
+
+        let user = select_user_by_email(*boxeddbconection.clone(), mail.to_string())
+            .await
+            .unwrap();
 
         let exp = OffsetDateTime::now_utc() + Duration::days(14);
         let claim = JwtClaims {
+            id: user.id.clone(),
             mail: mail.clone(),
             exp: exp.unix_timestamp(),
         };

@@ -1,5 +1,4 @@
 use async_std::path::Path;
-use auth::jwt_auth::{sign_in, JwtClaims, SECRET_KEY};
 
 use salvo::{
     handler,
