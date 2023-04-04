@@ -6,7 +6,6 @@ use salvo::{__private::tracing, prelude::*};
 use crate::handlers::{hello_by_id, hello_world, sign_up};
 use crate::upload::upload;
 
-// #[tokio::main]
 pub async fn main() {
     tracing_subscriber::fmt().init();
     tracing::info!("Listening on http://0.0.0.0:7878");
@@ -17,15 +16,20 @@ pub async fn main() {
 
     let router = Router::new()
         .get(hello_world)
-        .post(upload)
+        // .post(upload)
         .push(Router::with_path("signup").post(sign_up))
         .push(Router::with_path("signin").post(sign_in))
         .push(
-            Router::new()
-                .path("hello")
+            Router::with_path("upload")
                 .hoop(auth_handler)
-                .get(hello_world)
-                .push(Router::with_path("<id>").get(hello_by_id)),
+                .post(upload)
+                .push(
+                    Router::new()
+                        .path("hello")
+                        // .hoop(auth_handler)
+                        .get(hello_world)
+                        .push(Router::with_path("<id>").get(hello_by_id)),
+                ),
         );
 
     // Server Ready

@@ -10,7 +10,7 @@ use serde::{Deserialize, Serialize};
 use time::{Duration, OffsetDateTime};
 pub const SECRET_KEY: &str = "YOUR_SECRET_KEY_JWT_CODO_MATON_TOKEN";
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct JwtClaims {
     mail: String,
     exp: i64,
