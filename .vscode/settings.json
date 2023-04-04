@@ -10,5 +10,6 @@
       "username": "postgres",
       "password": "codo_maton"
     }
-  ]
+  ],
+  "rust-analyzer.linkedProjects": ["./api/Cargo.toml", "./api/Cargo.toml"]
 }

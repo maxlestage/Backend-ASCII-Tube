@@ -22,3 +22,4 @@ pub struct Video {
 pub struct Comment {
     texte: String,
 }
+

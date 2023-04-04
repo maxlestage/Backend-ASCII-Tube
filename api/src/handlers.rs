@@ -17,6 +17,7 @@ pub struct User {
     password: String,
 }
 
+
 #[handler]
 pub async fn hello_world() -> &'static str {
     "Hello there!"
@@ -40,4 +41,3 @@ pub async fn sign_up(user_input: User, res: &mut Response) {
         res.set_status_code(StatusCode::BAD_REQUEST);
     }
 }
-
