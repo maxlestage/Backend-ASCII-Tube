@@ -2,20 +2,11 @@ use db::db_connection::db_connection;
 // use queries::coment_service::*;
 use queries::user_service::*;
 // use queries::video_service::*;
+use crate::structs::User;
 use salvo::http::StatusCode;
 use salvo::{handler, prelude::*};
 use sea_orm::{entity::*, DatabaseConnection};
-use serde::{Deserialize, Serialize};
 use serde_json::json;
-
-#[derive(Serialize, Deserialize, Extractible, Debug)]
-#[extract(default_source(from = "body", format = "json"))]
-pub struct User {
-    firstname: String,
-    lastname: String,
-    mail: String,
-    password: String,
-}
 
 #[handler]
 pub async fn hello_world() -> &'static str {
@@ -40,4 +31,3 @@ pub async fn sign_up(user_input: User, res: &mut Response) {
         res.set_status_code(StatusCode::BAD_REQUEST);
     }
 }
-

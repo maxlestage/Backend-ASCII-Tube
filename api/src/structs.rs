@@ -1,3 +1,4 @@
+use salvo::prelude::*;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
