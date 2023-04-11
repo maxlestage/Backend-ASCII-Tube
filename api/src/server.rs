@@ -16,7 +16,7 @@ pub async fn main() {
         .get(hello_world)
         .push(Router::with_path("upload").post(upload_video))
         .push(Router::with_path("signup").post(sign_up))
-        .push(Router::with_path("signin").post(sign_in))
+        .push(Router::with_path("login").post(sign_in))
         .push(
             Router::with_path("upload")
                 .hoop(auth_handler)
