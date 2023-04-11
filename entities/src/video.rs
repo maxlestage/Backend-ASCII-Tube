@@ -2,10 +2,11 @@
 use super::prelude::*;
 use chrono::NaiveDate;
 use sea_orm::entity::prelude::*;
+use serde::{Deserialize, Serialize};
 
 // use sea_orm::Column;
 
-#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
+#[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel, Serialize, Deserialize)]
 #[sea_orm(table_name = "video")]
 pub struct Model {
     #[sea_orm(primary_key)]
@@ -16,7 +17,6 @@ pub struct Model {
     pub description: String,
     pub date: Option<NaiveDate>,
     pub path_to_json: String,
-    pub duration: i32,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

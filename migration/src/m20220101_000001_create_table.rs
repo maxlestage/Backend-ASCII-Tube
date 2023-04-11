@@ -22,6 +22,7 @@ impl MigrationTrait for Migration {
                     )
                     .col(ColumnDef::new(User::Firstname).string().not_null())
                     .col(ColumnDef::new(User::Lastname).string().not_null())
+                    .col(ColumnDef::new(User::username).string().not_null())
                     .col(ColumnDef::new(User::SignUpDate).date().not_null())
                     .col(ColumnDef::new(User::Mail).string().not_null())
                     .col(ColumnDef::new(User::Password).string().not_null())
@@ -46,6 +47,7 @@ enum User {
     Id,
     Firstname,
     Lastname,
+    username,
     SignUpDate,
     Mail,
     Password,

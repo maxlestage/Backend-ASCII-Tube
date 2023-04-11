@@ -1,23 +1,19 @@
+use crate::structs::Video;
 use chrono::Local;
-use entities::*;
+use entities::prelude::*;
+use entities::video;
 use sea_orm::ActiveModelTrait;
 use sea_orm::DatabaseConnection;
 
-pub async fn upload_video(
+pub async fn create_video(
     db: DatabaseConnection,
-    user_input: video::ActiveModel,
-    user: user::ActiveModel,
+    video_input: video::ActiveModel,
 ) -> Option<video::Model> {
-    let mut user_inputed = user_input;
+    let mut video_inputed = video_input;
+    video_inputed.date = sea_orm::ActiveValue::Set(Some(Local::now().to_owned().date_naive()));
+    let temp = format!("videos/{}", video_inputed.titre.as_ref().to_owned());
+    video_inputed.path_to_json = sea_orm::ActiveValue::Set(temp);
 
-    let x = user_inputed.id.clone();
-    let y = x.into_wrapped_value().as_ref().to_string();
-
-    user_inputed.date = sea_orm::ActiveValue::Set(Some(Local::now().to_owned().date_naive()));
-    user_inputed.path_to_json = sea_orm::ActiveValue::Set("/video/".to_string() + &y);
-    user_inputed.user_id = user.id;
-    user_inputed.duration = sea_orm::ActiveValue::set(0);
-
-    let video: video::Model = user_inputed.insert(&db).await.expect("Insertion loupé");
+    let video: video::Model = video_inputed.insert(&db).await.expect("Insertion loupé");
     Some(video)
 }
