@@ -1,10 +1,8 @@
 use auth::jwt_auth::{sign_in, JwtClaims, SECRET_KEY};
 
+use crate::handlers::{hello_by_id, hello_world, sign_up, upload_video};
 use salvo::jwt_auth::HeaderFinder;
 use salvo::{__private::tracing, prelude::*};
-
-use crate::handlers::{hello_by_id, hello_world, sign_up};
-use crate::upload::upload;
 
 pub async fn main() {
     tracing_subscriber::fmt().init();
@@ -16,13 +14,13 @@ pub async fn main() {
 
     let router = Router::new()
         .get(hello_world)
-        // .post(upload)
+        .push(Router::with_path("upload").post(upload_video))
         .push(Router::with_path("signup").post(sign_up))
         .push(Router::with_path("login").post(sign_in))
         .push(
             Router::with_path("upload")
                 .hoop(auth_handler)
-                .post(upload)
+                .post(upload_video)
                 .push(
                     Router::new()
                         .path("hello")

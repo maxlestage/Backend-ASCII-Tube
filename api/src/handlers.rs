@@ -1,22 +1,16 @@
+use async_std::path::Path;
 use db::db_connection::db_connection;
+use entities::video;
 // use queries::coment_service::*;
 use queries::user_service::*;
 // use queries::video_service::*;
+use crate::upload::upload;
+use queries::structs::{User, Video};
+use queries::video_service::create_video;
 use salvo::http::StatusCode;
 use salvo::{handler, prelude::*};
 use sea_orm::{entity::*, DatabaseConnection};
-use serde::{Deserialize, Serialize};
 use serde_json::json;
-
-#[derive(Serialize, Deserialize, Extractible, Debug)]
-#[extract(default_source(from = "body", format = "json"))]
-pub struct User {
-    firstname: String,
-    lastname: String,
-    mail: String,
-    password: String,
-}
-
 
 #[handler]
 pub async fn hello_world() -> &'static str {
@@ -40,4 +34,20 @@ pub async fn sign_up(user_input: User, res: &mut Response) {
         res.render(Text::Json("Bad Request"));
         res.set_status_code(StatusCode::BAD_REQUEST);
     }
+}
+
+#[handler]
+pub async fn upload_video(req: &mut Request, res: &mut Response) {
+    let test = req.form_data();
+    // println!("{:?}", req.body().unwrap());
+    println!("{:?}", test.await.unwrap().fields.get("id_user"));
+    let db_connect: DatabaseConnection = db_connection().await.expect("Error");
+    //let video = video::ActiveModel::from_json(json!(video_input)).expect("not valid");
+    upload(req, res).await.to_owned();
+    // if create_video(db_connect, video).await.is_some() {
+    //     res.set_status_code(StatusCode::CREATED);
+    // } else {
+    //     res.render(Text::Json("Bad Request"));
+    //     res.set_status_code(StatusCode::BAD_REQUEST);
+    // }
 }

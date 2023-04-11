@@ -1872,10 +1872,13 @@ dependencies = [
 name = "queries"
 version = "0.1.0"
 dependencies = [
+ "async-std",
  "bcrypt",
  "chrono",
+ "db",
  "entities",
  "futures",
+ "salvo",
  "sea-orm",
  "sea-orm-migration",
  "serde",

@@ -1,6 +1,6 @@
 use chrono::Local;
 use entities::prelude::*;
-use entities::*;
+use entities::user;
 
 use sea_orm::ActiveModelTrait;
 // use sea_orm::ActiveValue;
