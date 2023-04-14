@@ -12,6 +12,6 @@ pub async fn upload(req: &mut Request, res: &mut Response) {
             let dest = format!("temp/{}", file.name().unwrap_or("file"));
             let _info: Result<u64, std::io::Error> = std::fs::copy(&file.path(), Path::new(&dest));
         }
-        None => {}
+        None => {} // empty bloc cause we don't have any file.
     }
 }
