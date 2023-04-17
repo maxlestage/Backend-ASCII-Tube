@@ -37,3 +37,8 @@ pub async fn set_path_to_json(
     let video: video::Model = video.update(&db).await.expect("Insertion loupé");
     Some(video)
 }
+
+pub async fn get_video_by_id(db: DatabaseConnection, id: i32) -> Option<video::Model> {
+    let video: Option<video::Model> = Video::find_by_id(id).one(&db).await.expect("Select loupé");
+    video
+}

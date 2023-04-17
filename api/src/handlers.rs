@@ -3,12 +3,11 @@ use db::db_connection::db_connection;
 use entities::video;
 use queries::structs::User;
 use queries::user_service::*;
-use queries::video_service::{create_video, set_path_to_json};
+use queries::video_service::{create_video, get_video_by_id, set_path_to_json};
 use salvo::http::StatusCode;
 use salvo::{handler, prelude::*};
 use sea_orm::{entity::*, DatabaseConnection};
 use serde_json::json;
-
 #[handler]
 pub async fn hello_world() -> &'static str {
     "Hello there!"
@@ -70,4 +69,11 @@ pub async fn upload_video(req: &mut Request, res: &mut Response) {
         res.render(Text::Json("Bad Request"));
         res.set_status_code(StatusCode::BAD_REQUEST);
     }
+}
+
+#[handler]
+pub async fn get_video(req: &mut Request, res: &mut Response) {
+    let db_connect: DatabaseConnection = db_connection().await.expect("Error");
+    let video = get_video_by_id(db_connect, id).await.expect("Not found");
+    res.render(Text::Json(video.to_owned()))
 }
