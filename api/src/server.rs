@@ -17,18 +17,19 @@ pub async fn main() {
         .push(Router::with_path("upload").post(upload_video))
         .push(Router::with_path("signup").post(sign_up))
         .push(Router::with_path("login").post(sign_in))
-        .push(
-            Router::with_path("upload")
-                .hoop(auth_handler)
-                .post(upload_video)
-                .push(
-                    Router::new()
-                        .path("hello")
-                        // .hoop(auth_handler)
-                        .get(hello_world)
-                        .push(Router::with_path("<id>").get(hello_by_id)),
-                ),
-        );
+        // .push(
+        //     Router::with_path("upload")
+        //         .hoop(auth_handler)
+        //         .post(upload_video)
+        //         .push(
+        //             Router::new()
+        //                 .path("hello")
+        //                 // .hoop(auth_handler)
+        //                 .get(hello_world)
+        //                 .push(Router::with_path("<id>").get(hello_by_id)),
+        //         ),
+        // );
+        ;
 
     // Server Ready
     Server::new(TcpListener::bind("0.0.0.0:7878"))

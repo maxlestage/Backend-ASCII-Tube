@@ -20,9 +20,9 @@ impl MigrationTrait for Migration {
                             .primary_key(),
                     )
                     .col(ColumnDef::new(Video::UserId).integer().not_null())
-                    .col(ColumnDef::new(Video::Titre).string().not_null())
+                    .col(ColumnDef::new(Video::Title).string().not_null())
                     .col(ColumnDef::new(Video::Description).string().not_null())
-                    .col(ColumnDef::new(Video::Date).string().not_null())
+                    .col(ColumnDef::new(Video::Date).date().not_null())
                     .col(ColumnDef::new(Video::PathToJson).string().not_null())
                     .to_owned(),
             )
@@ -43,7 +43,7 @@ enum Video {
     Table,
     Id,
     UserId,
-    Titre,
+    Title,
     Description,
     Date,
     PathToJson,
