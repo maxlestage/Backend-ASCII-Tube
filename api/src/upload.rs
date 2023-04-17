@@ -1,8 +1,8 @@
 use async_std::path::Path;
 
-use salvo::{http::form::FilePart, Response};
+use salvo::http::form::FilePart;
 
-pub async fn upload(file: Option<&FilePart>, res: &mut Response) {
+pub async fn upload(file: Option<&FilePart>) {
     let file = file;
     match file {
         Some(file) => {

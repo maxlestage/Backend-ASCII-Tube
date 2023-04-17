@@ -42,3 +42,18 @@ pub async fn get_video_by_id(db: DatabaseConnection, id: i32) -> Option<video::M
     let video: Option<video::Model> = Video::find_by_id(id).one(&db).await.expect("Select loupé");
     video
 }
+
+pub async fn delete_video_by_id(db: DatabaseConnection, id: i32) -> bool {
+    let video: Option<video::Model> = Video::find_by_id(id).one(&db).await.expect("Select loupé");
+    if video.is_some() {
+        let video: video::ActiveModel = video.unwrap().into();
+        let res = video.delete(&db).await.expect("Can't delete");
+        if res.rows_affected == 1 {
+            true
+        } else {
+            false
+        }
+    } else {
+        false
+    }
+}
