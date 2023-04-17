@@ -73,7 +73,15 @@ pub async fn upload_video(req: &mut Request, res: &mut Response) {
 
 #[handler]
 pub async fn get_video(req: &mut Request, res: &mut Response) {
+    let id = req.param::<i32>("id").unwrap();
     let db_connect: DatabaseConnection = db_connection().await.expect("Error");
-    let video = get_video_by_id(db_connect, id).await.expect("Not found");
-    res.render(Text::Json(video.to_owned()))
+    let video = get_video_by_id(db_connect, id).await;
+    if video.is_some() {
+        res.render(Json(video))
+    } else {
+        res.set_status_code(StatusCode::NOT_FOUND);
+    }
 }
+
+#[handler]
+pub async fn delete_video(req: &mut Request, res: &mut Response) {}
