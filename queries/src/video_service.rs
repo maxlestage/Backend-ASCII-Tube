@@ -1,7 +1,5 @@
-use std::collections::HashMap;
-use std::fs;
-
-use chrono::Local;
+use chrono::NaiveDateTime;
+use chrono::Utc;
 use entities::prelude::Video;
 use entities::video;
 use reqwest;
@@ -12,6 +10,8 @@ use sea_orm::ActiveModelTrait;
 use sea_orm::DatabaseConnection;
 use sea_orm::EntityTrait;
 use sea_orm::Set;
+use std::collections::HashMap;
+use std::fs;
 // use sea_orm::ActiveValue;
 
 pub async fn create_video(
@@ -19,7 +19,8 @@ pub async fn create_video(
     video_input: video::ActiveModel,
 ) -> Option<video::Model> {
     let mut video_inputed = video_input;
-    video_inputed.date = sea_orm::ActiveValue::Set(Some(Local::now().to_owned().date_naive()));
+    video_inputed.date = sea_orm::ActiveValue::Set(Some(Utc::now().to_owned().naive_utc()));
+    println!("nique ta mere la date{:#?}", video_inputed.date);
     video_inputed.path_to_json = sea_orm::ActiveValue::Set("not set yet".to_string());
     let video: video::Model = video_inputed.insert(&db).await.expect("Insertion loupé");
     Some(video)
