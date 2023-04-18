@@ -15,7 +15,7 @@ pub struct User {
 #[extract(default_source(from = "body", format = "json"))]
 pub struct Video {
     pub user_id: i32,
-    pub titre: String,
+    pub title: String,
     pub description: String,
 }
 

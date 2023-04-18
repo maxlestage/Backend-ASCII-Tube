@@ -49,28 +49,37 @@ pub async fn upload_video(req: &mut Request, res: &mut Response) {
         .unwrap()
         .parse::<i32>()
         .unwrap();
-    let title = value.clone().fields.get("title").unwrap();
-    let description = value.clone().fields.get("description").unwrap();
 
-    let video = video::ActiveModel {
-        id: NotSet,
-        user_id: sea_orm::ActiveValue::Set(user_id.to_owned()),
-        title: sea_orm::ActiveValue::Set(title.to_owned()),
-        description: sea_orm::ActiveValue::Set(description.to_owned()),
-        date: NotSet,
-        path_to_json: NotSet,
-    };
-    upload(file.clone()).await;
-    let videocreate: Option<video::Model> = create_video(db_connect.clone(), video).await;
-    if videocreate.is_some() {
-        let video = set_path_to_json(db_connect, videocreate.unwrap())
-            .await
-            .expect("Path not created");
-        converter_ascii(video.path_to_json, file).await;
-        res.set_status_code(StatusCode::CREATED);
+    if select_user_by_id(db_connect.clone(), user_id)
+        .await
+        .is_some()
+    {
+        let title = value.clone().fields.get("title").unwrap();
+        let description = value.clone().fields.get("description").unwrap();
+
+        let video = video::ActiveModel {
+            id: NotSet,
+            user_id: sea_orm::ActiveValue::Set(user_id.to_owned()),
+            title: sea_orm::ActiveValue::Set(title.to_owned()),
+            description: sea_orm::ActiveValue::Set(description.to_owned()),
+            date: NotSet,
+            path_to_json: NotSet,
+        };
+        upload(file.clone()).await;
+        let videocreate: Option<video::Model> = create_video(db_connect.clone(), video).await;
+        if videocreate.is_some() {
+            let video = set_path_to_json(db_connect, videocreate.unwrap())
+                .await
+                .expect("Path not created");
+            converter_ascii(video.path_to_json, file).await;
+            res.set_status_code(StatusCode::CREATED);
+        } else {
+            res.render(Text::Json("Bad Request"));
+            res.set_status_code(StatusCode::BAD_REQUEST);
+        }
     } else {
-        res.render(Text::Json("Bad Request"));
-        res.set_status_code(StatusCode::BAD_REQUEST);
+        res.render(Text::Json("User not found"));
+        res.set_status_code(StatusCode::NOT_FOUND);
     }
 }
 

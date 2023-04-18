@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::fs;
 
 use chrono::Local;
 use entities::prelude::Video;
@@ -11,7 +12,6 @@ use sea_orm::ActiveModelTrait;
 use sea_orm::DatabaseConnection;
 use sea_orm::EntityTrait;
 use sea_orm::Set;
-use serde_json::json;
 // use sea_orm::ActiveValue;
 
 pub async fn create_video(
@@ -68,19 +68,15 @@ pub async fn delete_video_by_id(db: DatabaseConnection, id: i32) -> bool {
 
 pub async fn converter_ascii(path: String, file: Option<&FilePart>) {
     let name = file.unwrap().name().unwrap();
+    let _directory =
+        fs::create_dir_all("/home/azadr/Documents/Projet/project-dev-b3-back".to_string() + &path);
     let mut map = HashMap::new();
-    // let video_path = "/home/azadr/Documents/Projet/project-dev-b3-back/temp/" + name;
-    map.insert(
-        "video_path",
-        "/home/azadr/Documents/Projet/project-dev-b3-back/temp/TECHNO CHICKEN.mp4",
-    );
-    map.insert(
-        "output_path",
-        "/home/azadr/Documents/Projet/project-dev-b3-back/video/",
-    );
-
+    let video_path = "/home/azadr/Documents/Projet/project-dev-b3-back/temp/".to_string() + name;
+    let video_output_path = "/home/azadr/Documents/Projet/project-dev-b3-back".to_string() + &path;
+    map.insert("video_path", video_path);
+    map.insert("output_path", video_output_path.to_string());
     let client = reqwest::Client::new();
-    let res = client
+    let _res = client
         .post("http://127.0.0.1:8000/upload")
         .json(&map)
         .header(ACCEPT, "application/json")
@@ -88,5 +84,4 @@ pub async fn converter_ascii(path: String, file: Option<&FilePart>) {
         .send()
         .await
         .expect("Error");
-    println!("{:#?}", res);
 }
