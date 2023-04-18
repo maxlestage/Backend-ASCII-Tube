@@ -10,10 +10,11 @@ use serde::{Deserialize, Serialize};
 #[sea_orm(table_name = "video")]
 pub struct Model {
     #[sea_orm(primary_key)]
+    #[serde(skip_deserializing)]
     pub id: i32,
     #[sea_orm(column_name = "user_id")]
     pub user_id: i32,
-    pub titre: String,
+    pub title: String,
     pub description: String,
     pub date: Option<NaiveDate>,
     pub path_to_json: String,

@@ -6,3 +6,4 @@ migration/target
 .env
 .DS_Store
 .idea
+/temp

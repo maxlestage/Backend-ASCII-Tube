@@ -6,6 +6,7 @@ use serde::{Deserialize, Serialize};
 pub struct User {
     firstname: String,
     lastname: String,
+    username: String,
     mail: String,
     password: String,
 }
@@ -23,4 +24,3 @@ pub struct Video {
 pub struct Comment {
     texte: String,
 }
-
