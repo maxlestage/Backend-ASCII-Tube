@@ -49,10 +49,10 @@ pub async fn delete_user_by_id(db: DatabaseConnection, id: i32) {
     dbg!(deleted);
 }
 
-pub async fn select_user_by_id(db: DatabaseConnection, id: i32) {
-    let _select_user: Option<user::Model> =
+pub async fn select_user_by_id(db: DatabaseConnection, id: i32) -> Option<user::Model> {
+    let select_user: Option<user::Model> =
         User::find_by_id(id).one(&db).await.expect("Select loupé");
-    // dbg!(select_user);
+    select_user
 }
 
 pub async fn select_user_by_email(db: DatabaseConnection, mail: String) -> Option<user::Model> {
