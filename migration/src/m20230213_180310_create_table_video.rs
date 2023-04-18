@@ -22,7 +22,7 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(Video::UserId).integer().not_null())
                     .col(ColumnDef::new(Video::Title).string().not_null())
                     .col(ColumnDef::new(Video::Description).string().not_null())
-                    .col(ColumnDef::new(Video::Date).date().not_null())
+                    .col(ColumnDef::new(Video::Date).timestamp().not_null())
                     .col(ColumnDef::new(Video::PathToJson).string().not_null())
                     .to_owned(),
             )
