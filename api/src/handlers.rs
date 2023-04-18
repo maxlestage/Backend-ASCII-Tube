@@ -3,7 +3,9 @@ use db::db_connection::db_connection;
 use entities::video;
 use queries::structs::User;
 use queries::user_service::*;
-use queries::video_service::{create_video, delete_video_by_id, get_video_by_id, set_path_to_json};
+use queries::video_service::{
+    converter_ascii, create_video, delete_video_by_id, get_video_by_id, set_path_to_json,
+};
 use salvo::http::StatusCode;
 use salvo::{handler, prelude::*};
 use sea_orm::{entity::*, DatabaseConnection};
@@ -58,12 +60,13 @@ pub async fn upload_video(req: &mut Request, res: &mut Response) {
         date: NotSet,
         path_to_json: NotSet,
     };
-    upload(file).await;
+    upload(file.clone()).await;
     let videocreate: Option<video::Model> = create_video(db_connect.clone(), video).await;
     if videocreate.is_some() {
-        set_path_to_json(db_connect, videocreate.unwrap())
+        let video = set_path_to_json(db_connect, videocreate.unwrap())
             .await
             .expect("Path not created");
+        converter_ascii(video.path_to_json, file).await;
         res.set_status_code(StatusCode::CREATED);
     } else {
         res.render(Text::Json("Bad Request"));

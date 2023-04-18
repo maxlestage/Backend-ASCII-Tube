@@ -1,10 +1,17 @@
+use std::collections::HashMap;
+
 use chrono::Local;
 use entities::prelude::Video;
 use entities::video;
+use reqwest;
+use reqwest::header::ACCEPT;
+use reqwest::header::CONTENT_TYPE;
+use salvo::http::form::FilePart;
 use sea_orm::ActiveModelTrait;
 use sea_orm::DatabaseConnection;
 use sea_orm::EntityTrait;
 use sea_orm::Set;
+use serde_json::json;
 // use sea_orm::ActiveValue;
 
 pub async fn create_video(
@@ -17,6 +24,7 @@ pub async fn create_video(
     let video: video::Model = video_inputed.insert(&db).await.expect("Insertion loupé");
     Some(video)
 }
+
 pub async fn set_path_to_json(
     db: DatabaseConnection,
     video_input: video::Model,
@@ -56,4 +64,29 @@ pub async fn delete_video_by_id(db: DatabaseConnection, id: i32) -> bool {
     } else {
         false
     }
+}
+
+pub async fn converter_ascii(path: String, file: Option<&FilePart>) {
+    let name = file.unwrap().name().unwrap();
+    let mut map = HashMap::new();
+    // let video_path = "/home/azadr/Documents/Projet/project-dev-b3-back/temp/" + name;
+    map.insert(
+        "video_path",
+        "/home/azadr/Documents/Projet/project-dev-b3-back/temp/TECHNO CHICKEN.mp4",
+    );
+    map.insert(
+        "output_path",
+        "/home/azadr/Documents/Projet/project-dev-b3-back/video/",
+    );
+
+    let client = reqwest::Client::new();
+    let res = client
+        .post("http://127.0.0.1:8000/upload")
+        .json(&map)
+        .header(ACCEPT, "application/json")
+        .header(CONTENT_TYPE, "application/json")
+        .send()
+        .await
+        .expect("Error");
+    println!("{:#?}", res);
 }
