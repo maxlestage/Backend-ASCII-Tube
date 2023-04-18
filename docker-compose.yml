@@ -1,8 +1,8 @@
-version: "3"
+version: '3.9'
 services:
-  db:
-    container_name: codo_maton-db
+  database:
     image: postgres:latest
+    restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=codo_maton
@@ -10,6 +10,17 @@ services:
       - codo_maton-db-data:/var/lib/postgresql/data
       - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
     ports:
-      - "5432:5432"
+      - 5432:5432
+
+  backend:
+    image: backend
+    depends_on:
+      - database
+    restart: always
+    ports:
+      - 7878:7878
+    volumes:
+      - /home/dorian/temp:/temp
+      - /home/dorian/videos:/videos
 volumes:
   codo_maton-db-data:
