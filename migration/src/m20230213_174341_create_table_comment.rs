@@ -23,7 +23,7 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(Comment::UserId).integer().not_null())
                     .col(ColumnDef::new(Comment::VideoId).integer().not_null())
                     .col(ColumnDef::new(Comment::Text).string().not_null())
-                    .col(ColumnDef::new(Comment::Date).string().not_null())
+                    .col(ColumnDef::new(Comment::Date).timestamp().not_null())
                     .to_owned(),
             )
             .await

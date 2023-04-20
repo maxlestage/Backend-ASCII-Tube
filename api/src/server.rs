@@ -1,4 +1,6 @@
-use crate::handlers::{delete_video, get_video, hello_world, sign_up, upload_video};
+use crate::handlers::{
+    create_comment, delete_video, get_comment, get_video, hello_world, sign_up, upload_video,
+};
 use auth::jwt_auth::{sign_in, JwtClaims, SECRET_KEY};
 use db::db_connection::db_connection;
 use migration::{Migrator, MigratorTrait};
@@ -22,6 +24,8 @@ pub async fn main() {
         .push(Router::with_path("login").post(sign_in))
         .push(Router::with_path("video/<id>").get(get_video))
         .push(Router::with_path("video/<id>").delete(delete_video))
+        .push(Router::with_path("video/<video_id>/<user_id>").post(create_comment))
+        .push(Router::with_path("video/comment/<video_id>").get(get_comment))
 
         // .push(
         //     Router::with_path("upload")

@@ -1,7 +1,8 @@
 use crate::upload::upload;
 use db::db_connection::db_connection;
-use entities::video;
-use queries::structs::User;
+use entities::{comment, video};
+use queries::coment_service::{get_comment_by_video_id, insert_comment};
+use queries::structs::{Comment, User};
 use queries::user_service::*;
 use queries::video_service::{
     converter_ascii, create_video, delete_video_by_id, get_video_by_id, set_path_to_json,
@@ -104,5 +105,40 @@ pub async fn delete_video(req: &mut Request, res: &mut Response) {
         res.set_status_code(StatusCode::OK);
     } else {
         res.set_status_code(StatusCode::NOT_FOUND);
+    }
+}
+
+#[handler]
+pub async fn create_comment(req: &mut Request, res: &mut Response) {
+    let user_id = req.param::<i32>("user_id").unwrap();
+    let video_id = req.param::<i32>("video_id").unwrap();
+    let comment_input: Comment = req.extract().await.unwrap();
+    let db_connect: DatabaseConnection = db_connection().await.expect("Error");
+
+    let comment = comment::ActiveModel {
+        id: NotSet,
+        user_id: sea_orm::ActiveValue::Set(user_id.to_owned()),
+        video_id: sea_orm::ActiveValue::Set(video_id.to_owned()),
+        text: sea_orm::ActiveValue::Set(comment_input.text),
+        date: NotSet,
+    };
+
+    let created = insert_comment(db_connect, comment).await;
+    if created.is_some() {
+        res.set_status_code(StatusCode::OK);
+    } else {
+        res.set_status_code(StatusCode::NOT_FOUND);
+    }
+}
+
+#[handler]
+pub async fn get_comment(req: &mut Request, res: &mut Response) {
+    let id = req.param::<i32>("video_id").unwrap();
+    let db_connect: DatabaseConnection = db_connection().await.expect("Error");
+    let comment = get_comment_by_video_id(db_connect, id).await;
+    if comment.is_empty() {
+        res.set_status_code(StatusCode::NOT_FOUND);
+    } else {
+        res.render(Json(comment))
     }
 }

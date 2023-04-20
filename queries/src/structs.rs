@@ -22,5 +22,5 @@ pub struct Video {
 #[derive(Serialize, Deserialize, Extractible, Debug)]
 #[extract(default_source(from = "body", format = "json"))]
 pub struct Comment {
-    texte: String,
+    pub text: String,
 }
