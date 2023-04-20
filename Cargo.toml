@@ -19,6 +19,7 @@ db = { path = "db" }
 migration = { path = "migration" }
 queries = {path = "queries"}
 auth = {path = "auth"}
+salvo = { version = "*", features=["cors"] }
 
 [workspace.dependencies]
 tokio = { version = "^1", features = ["macros"] }
