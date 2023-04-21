@@ -2,7 +2,7 @@ use std::time::Duration;
 
 use sea_orm::{ConnectOptions, Database, DatabaseConnection, DbErr};
 
-const DATABASE_URL: &str = "postgres://postgres:codo_maton@localhost:5432";
+const DATABASE_URL: &str = "postgres://postgres:codo_maton@database:5432";
 const DB_NAME: &str = "codo_maton_db";
 
 pub async fn db_connection() -> Result<DatabaseConnection, DbErr> {
