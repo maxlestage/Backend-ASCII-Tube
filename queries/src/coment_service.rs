@@ -26,3 +26,20 @@ pub async fn get_comment_by_video_id(db: DatabaseConnection, id: i32) -> Vec<com
         .expect("Select loupé");
     comment
 }
+pub async fn delete_comment_by_id(db: DatabaseConnection, id: i32) -> bool {
+    let comment: Option<comment::Model> = Comment::find_by_id(id)
+        .one(&db)
+        .await
+        .expect("Select loupé");
+    if comment.is_some() {
+        let comment: comment::ActiveModel = comment.unwrap().into();
+        let res = comment.delete(&db).await.expect("Can't delete");
+        if res.rows_affected == 1 {
+            true
+        } else {
+            false
+        }
+    } else {
+        false
+    }
+}

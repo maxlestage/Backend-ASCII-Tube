@@ -1,7 +1,7 @@
 use crate::upload::upload;
 use db::db_connection::db_connection;
 use entities::{comment, video};
-use queries::coment_service::{get_comment_by_video_id, insert_comment};
+use queries::coment_service::{delete_comment_by_id, get_comment_by_video_id, insert_comment};
 use queries::structs::{Comment, User};
 use queries::user_service::*;
 use queries::video_service::{
@@ -140,5 +140,16 @@ pub async fn get_comment(req: &mut Request, res: &mut Response) {
         res.set_status_code(StatusCode::NOT_FOUND);
     } else {
         res.render(Json(comment))
+    }
+}
+#[handler]
+pub async fn delete_comment(req: &mut Request, res: &mut Response) {
+    let id = req.param::<i32>("id").unwrap();
+    let db_connect: DatabaseConnection = db_connection().await.expect("Error");
+    let deleted = delete_comment_by_id(db_connect, id).await;
+    if deleted {
+        res.set_status_code(StatusCode::OK);
+    } else {
+        res.set_status_code(StatusCode::NOT_FOUND);
     }
 }
