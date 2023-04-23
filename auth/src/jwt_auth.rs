@@ -2,7 +2,7 @@ use db::db_connection::db_connection;
 use jsonwebtoken::{self, EncodingKey};
 use queries::user_service::{password_is_valid, select_user_by_email};
 
-use salvo::http::Method;
+use salvo::http::{Method};
 use salvo::hyper::header::{self};
 use salvo::prelude::*;
 use sea_orm::DatabaseConnection;
@@ -12,7 +12,7 @@ pub const SECRET_KEY: &str = "YOUR_SECRET_KEY_JWT_CODO_MATON_TOKEN";
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct JwtClaims {
-    id: i32,
+    pub id: i32,
     mail: String,
     exp: i64,
 }

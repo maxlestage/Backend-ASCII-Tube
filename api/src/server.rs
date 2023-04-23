@@ -20,7 +20,7 @@ pub async fn main() {
 
     let router = Router::new()
         .get(hello_world)
-        .push(Router::with_path("api/video/upload").post(upload_video))
+        .push(Router::with_path("api/video/upload").hoop(_auth_handler).post(upload_video))
         .push(Router::with_path("api/signup").post(sign_up))
         .push(Router::with_path("api/login").post(sign_in))
         .push(Router::with_path("api/video/<id>").get(get_video))

@@ -1,4 +1,5 @@
 use crate::upload::upload;
+use auth::jwt_auth::JwtClaims;
 use db::db_connection::db_connection;
 use entities::{comment, video};
 use queries::coment_service::{delete_comment_by_id, get_comment_by_video_id, insert_comment};
@@ -7,7 +8,7 @@ use queries::user_service::*;
 use queries::video_service::{
     converter_ascii, create_video, delete_video_by_id, get_video_by_id, set_path_to_json,
 };
-use salvo::http::StatusCode;
+use salvo::http::{StatusCode};
 use salvo::{handler, prelude::*};
 use sea_orm::{entity::*, DatabaseConnection};
 use serde_json::json;
@@ -36,20 +37,16 @@ pub async fn sign_up(user_input: User, res: &mut Response) {
 }
 
 #[handler]
-pub async fn upload_video(req: &mut Request, res: &mut Response) {
+pub async fn upload_video(req: &mut Request, depot: &mut Depot, res: &mut Response) {
     let db_connect: DatabaseConnection = db_connection().await.expect("Error");
 
     let data = req.form_data();
     let value = data.await.unwrap().clone();
 
+    let authorize_data = depot.jwt_auth_data::<JwtClaims>().unwrap();
+
     let file = value.clone().files.get("file");
-    let user_id = value
-        .clone()
-        .fields
-        .get("id_user")
-        .unwrap()
-        .parse::<i32>()
-        .unwrap();
+    let user_id = authorize_data.claims.id;
 
     if select_user_by_id(db_connect.clone(), user_id)
         .await

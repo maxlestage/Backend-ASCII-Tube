@@ -10,7 +10,6 @@ use sea_orm::DatabaseConnection;
 use sea_orm::EntityTrait;
 use sea_orm::Set;
 use std::collections::HashMap;
-use std::fs;
 // use sea_orm::ActiveValue;
 
 pub async fn create_video(
@@ -35,7 +34,7 @@ pub async fn set_path_to_json(
         .expect("Select loupé");
     let mut video: video::ActiveModel = video.unwrap().into();
     let path = format!(
-        "/video/{}/{}",
+        "/videos/{}/{}",
         video_inputed.user_id.to_owned(),
         video_inputed.id.to_owned()
     );
@@ -67,16 +66,14 @@ pub async fn delete_video_by_id(db: DatabaseConnection, id: i32) -> bool {
 
 pub async fn converter_ascii(path: String, file: Option<&FilePart>) {
     let name = file.unwrap().name().unwrap();
-    let _directory =
-        fs::create_dir_all("/home/azadr/Documents/Projet/project-dev-b3-back".to_string() + &path);
     let mut map = HashMap::new();
-    let video_path = "/home/azadr/Documents/Projet/project-dev-b3-back/temp/".to_string() + name;
-    let video_output_path = "/home/azadr/Documents/Projet/project-dev-b3-back".to_string() + &path;
+    let video_path = "/temp/".to_string() + name;
+    let video_output_path = &path;
     map.insert("video_path", video_path);
     map.insert("output_path", video_output_path.to_string());
     let client = reqwest::Client::new();
     let _res = client
-        .post("http://127.0.0.1:8000/upload")
+        .post("http://video-api:8000/upload")
         .json(&map)
         .header(ACCEPT, "application/json")
         .header(CONTENT_TYPE, "application/json")

@@ -28,7 +28,9 @@ services:
 volumes:
   codo_maton-db-data:
   temp:
+    external: true
   videos:
+    external: true
 
 networks:
   default:
