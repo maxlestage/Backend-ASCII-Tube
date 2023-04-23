@@ -11,15 +11,26 @@ services:
       - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
     ports:
       - 5432:5432
+
   backend:
-    image: backend
+    build:
+      context: .
+      dockerfile: dockerfile
     depends_on:
       - database
     restart: always
     ports:
       - 7878:7878
     volumes:
-      - /home/dorian/temp:/temp
-      - /home/dorian/videos:/videos
+      - temp:/temp
+      - videos:/videos
+
 volumes:
   codo_maton-db-data:
+  temp:
+  videos:
+
+networks:
+  default:
+    external:
+      name: projet-dev-network

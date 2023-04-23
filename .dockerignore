@@ -7,3 +7,5 @@ migration/target
 .DS_Store
 .idea
 /temp
+.git/
+docker-compose.yml
