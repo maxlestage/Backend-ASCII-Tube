@@ -1,7 +1,7 @@
 use db::db_connection::db_connection;
 use entities::user::UserOmitMP;
 use jsonwebtoken::{self, EncodingKey};
-use queries::user_service::{password_is_valid, select_user_by_email, select_user_by_id};
+use queries::user_service::{password_is_valid, select_user_by_email};
 
 use salvo::http::Method;
 use salvo::hyper::header::{self};
@@ -62,7 +62,7 @@ pub async fn sign_in(
             res.set_status_code(StatusCode::NOT_ACCEPTABLE);
             return Ok(());
         }
-        let userOmitMp = UserOmitMP {
+        let user_omit_mp = UserOmitMP {
             id: user.clone().id,
             firstname: user.clone().firstname,
             lastname: user.clone().lastname,
@@ -72,8 +72,7 @@ pub async fn sign_in(
         };
         res.add_header(header::AUTHORIZATION, format!("Bearer {}", token), true)
             .expect("error token");
-        res.render(Text::Json(format!("Bearer:{}", token)));
-        res.render(Json(userOmitMp));
+        res.render(Json(user_omit_mp));
         return Ok(());
     } else {
         match depot.jwt_auth_state() {

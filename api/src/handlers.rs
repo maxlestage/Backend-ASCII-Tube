@@ -45,7 +45,7 @@ pub async fn get_user(req: &mut Request, res: &mut Response) {
     let id = req.param::<i32>("id").unwrap();
     let db_connect: DatabaseConnection = db_connection().await.expect("Error");
     let user = select_user_by_id(db_connect, id).await;
-    let userOmitMp = UserOmitMP {
+    let user_omit_mp = UserOmitMP {
         id: user.clone().unwrap().id,
         firstname: user.clone().unwrap().firstname,
         lastname: user.clone().unwrap().lastname,
@@ -54,7 +54,7 @@ pub async fn get_user(req: &mut Request, res: &mut Response) {
         mail: user.clone().unwrap().mail,
     };
     if user.is_some() {
-        res.render(Json(userOmitMp))
+        res.render(Json(user_omit_mp))
     } else {
         res.set_status_code(StatusCode::NOT_FOUND);
     }
