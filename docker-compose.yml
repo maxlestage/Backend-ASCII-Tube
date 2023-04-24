@@ -12,27 +12,27 @@ services:
     ports:
       - 5432:5432
 
-#   backend:
-#     build:
-#       context: .
-#       dockerfile: dockerfile
-#     depends_on:
-#       - database
-#     restart: always
-#     ports:
-#       - 7878:7878
-#     volumes:
-#       - temp:/temp
-#       - videos:/videos
+  backend:
+    build:
+      context: .
+      dockerfile: dockerfile
+    depends_on:
+      - database
+    restart: always
+    ports:
+      - 7878:7878
+    volumes:
+      - temp:/temp
+      - videos:/videos
 
 volumes:
   codo_maton-db-data:
-    #   temp:
-    #     external: true
-    #   videos:
-    #     external: true
+  temp:
+    external: true
+  videos:
+    external: true
 
-    # networks:
-    #   default:
-    #     external:
-    #       name: projet-dev-network
+networks:
+  default:
+    external:
+      name: projet-dev-network
