@@ -7,3 +7,5 @@ target/*
 .idea
 /temp/*
 /video/*
+docker-compose.yml
+db/*

@@ -1,6 +1,7 @@
 use crate::upload::upload;
 use auth::jwt_auth::JwtClaims;
 use db::db_connection::db_connection;
+use entities::user::UserOmitMP;
 use entities::{comment, video};
 use queries::coment_service::{delete_comment_by_id, get_comment_by_video_id, insert_comment};
 use queries::structs::{Comment, User};
@@ -8,7 +9,7 @@ use queries::user_service::*;
 use queries::video_service::{
     converter_ascii, create_video, delete_video_by_id, get_video_by_id, set_path_to_json,
 };
-use salvo::http::{StatusCode};
+use salvo::http::StatusCode;
 use salvo::{handler, prelude::*};
 use sea_orm::{entity::*, DatabaseConnection};
 use serde_json::json;
@@ -28,11 +29,34 @@ pub async fn sign_up(user_input: User, res: &mut Response) {
 
     let user = entities::user::ActiveModel::from_json(json!(user_input)).expect("not valid");
 
-    if create_user(db_connect, user).await.is_some() {
+    if create_user(db_connect.clone(), user.clone())
+        .await
+        .is_some()
+    {
         res.set_status_code(StatusCode::CREATED);
     } else {
         res.render(Text::Json("Bad Request"));
         res.set_status_code(StatusCode::BAD_REQUEST);
+    }
+}
+
+#[handler]
+pub async fn get_user(req: &mut Request, res: &mut Response) {
+    let id = req.param::<i32>("id").unwrap();
+    let db_connect: DatabaseConnection = db_connection().await.expect("Error");
+    let user = select_user_by_id(db_connect, id).await;
+    let userOmitMp = UserOmitMP {
+        id: user.clone().unwrap().id,
+        firstname: user.clone().unwrap().firstname,
+        lastname: user.clone().unwrap().lastname,
+        username: user.clone().unwrap().username,
+        sign_up_date: user.clone().unwrap().sign_up_date.unwrap(),
+        mail: user.clone().unwrap().mail,
+    };
+    if user.is_some() {
+        res.render(Json(userOmitMp))
+    } else {
+        res.set_status_code(StatusCode::NOT_FOUND);
     }
 }
 

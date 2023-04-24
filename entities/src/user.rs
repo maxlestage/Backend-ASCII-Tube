@@ -18,7 +18,15 @@ pub struct Model {
     pub mail: String,
     pub password: String,
 }
-
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct UserOmitMP {
+    pub id: i32,
+    pub firstname: String,
+    pub lastname: String,
+    pub username: String,
+    pub sign_up_date: Date,
+    pub mail: String,
+}
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
     #[sea_orm(has_many = "super::video::Entity")]

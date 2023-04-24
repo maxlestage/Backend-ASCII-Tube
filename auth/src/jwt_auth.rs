@@ -1,8 +1,9 @@
 use db::db_connection::db_connection;
+use entities::user::UserOmitMP;
 use jsonwebtoken::{self, EncodingKey};
-use queries::user_service::{password_is_valid, select_user_by_email};
+use queries::user_service::{password_is_valid, select_user_by_email, select_user_by_id};
 
-use salvo::http::{Method};
+use salvo::http::Method;
 use salvo::hyper::header::{self};
 use salvo::prelude::*;
 use sea_orm::DatabaseConnection;
@@ -61,10 +62,18 @@ pub async fn sign_in(
             res.set_status_code(StatusCode::NOT_ACCEPTABLE);
             return Ok(());
         }
-
+        let userOmitMp = UserOmitMP {
+            id: user.clone().id,
+            firstname: user.clone().firstname,
+            lastname: user.clone().lastname,
+            username: user.clone().username,
+            sign_up_date: user.clone().sign_up_date.unwrap(),
+            mail: user.clone().mail,
+        };
         res.add_header(header::AUTHORIZATION, format!("Bearer {}", token), true)
             .expect("error token");
         res.render(Text::Json(format!("Bearer:{}", token)));
+        res.render(Json(userOmitMp));
         return Ok(());
     } else {
         match depot.jwt_auth_state() {
