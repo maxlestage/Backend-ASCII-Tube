@@ -9,3 +9,4 @@ target/*
 /video/*
 docker-compose.yml
 db/*
+.devcontainer/

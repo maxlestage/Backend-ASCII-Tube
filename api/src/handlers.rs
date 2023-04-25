@@ -1,5 +1,7 @@
 use crate::upload::upload;
 use auth::jwt_auth::JwtClaims;
+use base64::Engine;
+use base64::engine::general_purpose;
 use db::db_connection::db_connection;
 use entities::user::UserOmitMP;
 use entities::{comment, video};
@@ -13,6 +15,7 @@ use salvo::http::StatusCode;
 use salvo::{handler, prelude::*};
 use sea_orm::{entity::*, DatabaseConnection};
 use serde_json::json;
+use std::fs;
 #[handler]
 pub async fn hello_world() -> &'static str {
     "Hello there!"
@@ -111,7 +114,26 @@ pub async fn get_video(req: &mut Request, res: &mut Response) {
     let db_connect: DatabaseConnection = db_connection().await.expect("Error");
     let video = get_video_by_id(db_connect, id).await;
     if video.is_some() {
-        res.render(Json(video))
+        let video_data = video.unwrap();
+        let contents = fs::read_to_string(video_data.clone().path_to_json + "/Style.LIGHT.json")
+            .expect("file not found");
+        
+        let sound = fs::read(video_data.clone().path_to_json + "/sound.mp3")
+            .expect("file not found");
+        let base64_sound = format!("{}", general_purpose::STANDARD.encode(&sound));
+        
+        let video_with_content = video::VideoWithContent{
+            id: video_data.id,
+            user_id: video_data.user_id,
+            title: video_data.title,
+            description: video_data.description,
+            date: video_data.date,
+            path_to_json: video_data.path_to_json,
+            content: contents,
+            sound: base64_sound
+        };
+
+        res.render(Json(video_with_content));
     } else {
         res.set_status_code(StatusCode::NOT_FOUND);
     }

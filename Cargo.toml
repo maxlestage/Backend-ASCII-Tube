@@ -20,6 +20,8 @@ migration = { path = "migration" }
 queries = {path = "queries"}
 auth = {path = "auth"}
 salvo = { version = "*", features=["cors"] }
+base64 = "0.21.0"
+fs = "0.0.5"
 
 [workspace.dependencies]
 tokio = { version = "^1", features = ["macros"] }

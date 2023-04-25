@@ -20,3 +20,5 @@ async-std = { version = "1", features = ["attributes", "tokio1"] }
 queries= { path = "../queries" }
 entities= { path = "../entities" }
 migration= {path = "../migration"}
+base64 = "0.21.0"
+fs = "0.0.5"
