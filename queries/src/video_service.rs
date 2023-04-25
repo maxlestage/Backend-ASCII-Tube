@@ -49,6 +49,11 @@ pub async fn get_video_by_id(db: DatabaseConnection, id: i32) -> Option<video::M
     video
 }
 
+pub async fn get_videos(db: DatabaseConnection) -> Vec<video::Model> {
+    let videos: Vec<video::Model> = Video::find().all(&db).await.unwrap();
+    videos
+}
+
 pub async fn delete_video_by_id(db: DatabaseConnection, id: i32) -> bool {
     let video: Option<video::Model> = Video::find_by_id(id).one(&db).await.expect("Select loupé");
     if video.is_some() {

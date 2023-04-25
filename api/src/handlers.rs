@@ -9,7 +9,7 @@ use queries::coment_service::{delete_comment_by_id, get_comment_by_video_id, ins
 use queries::structs::{Comment, User};
 use queries::user_service::*;
 use queries::video_service::{
-    converter_ascii, create_video, delete_video_by_id, get_video_by_id, set_path_to_json,
+    converter_ascii, create_video, delete_video_by_id, get_video_by_id, set_path_to_json, get_videos
 };
 use salvo::http::StatusCode;
 use salvo::{handler, prelude::*};
@@ -137,6 +137,13 @@ pub async fn get_video(req: &mut Request, res: &mut Response) {
     } else {
         res.set_status_code(StatusCode::NOT_FOUND);
     }
+}
+
+#[handler]
+pub async fn get_all_videos(req: &mut Request, res: &mut Response) {
+    let db_connect: DatabaseConnection = db_connection().await.expect("Error");
+    let videos = get_videos(db_connect).await;
+    res.render(Json(videos));
 }
 
 #[handler]

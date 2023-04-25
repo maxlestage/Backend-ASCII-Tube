@@ -1,6 +1,6 @@
 use crate::handlers::{
     create_comment, delete_comment, delete_video, get_comment, get_user, get_video, hello_world,
-    sign_up, upload_video,
+    sign_up, upload_video, get_all_videos
 };
 use auth::jwt_auth::{sign_in, JwtClaims, SECRET_KEY};
 use db::db_connection::db_connection;
@@ -26,6 +26,7 @@ pub async fn main() {
         .push(Router::with_path("api/user/<id>").get(get_user))
         .push(Router::with_path("api/video/<id>").delete(delete_video))
         .push(Router::with_path("api/comment/<video_id>/").get(get_comment))
+        .push(Router::with_path("api/videos").get(get_all_videos))
         .push(
             Router::new().push(
                 Router::new()
