@@ -46,8 +46,8 @@ Le projet est struturé de manière à être modulable, chacun des dossiers repr
 - src : Base qui regroupe toutes les librairies et qui permet de lancer le projet.
 - target : Ce dossier contient les éléments nécesaires au build ainsi que le fichier éxécutable.
 - .dockerignore : Permet à docker d'ignorer les fichiers renseigés.
-- .gitignore : permet d'ignorer des fichiers lors de lutilisation de git.
-- cargo.lock :  
+- .gitignore : Permet d'ignorer des fichiers lors de lutilisation de git.
+- cargo.lock : Généré automatiquement par le système de construction. Il sert à garantir ql'éxactitude des dépendances sont utilisées lors de la construction de l'application ou de la bibliothèque à chaque fois, quel que soit l'environnement de compilation.
 
 ### Gestion des ressources
 
