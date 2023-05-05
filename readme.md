@@ -1,9 +1,7 @@
 
 # Projet Dev B3 Back
 
-<div style="text-align:center;">
-    <img src="extra/CodomatonLogo.png" alt="Logo de Codomaton" width=250 position=center>
-</div>
+![CodoMaton](extra/banner)
 
 Ce projet est destiné à être utilisé en conjonction avec le projet Dev B3 Front pour fournir une application Web complète.
 
