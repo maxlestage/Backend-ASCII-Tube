@@ -36,6 +36,21 @@ Le projet est struturé de manière à être modulable, chacun des dossiers repr
 
 ![CodoMatonArchiProjet](extra/archi_projet.png)
 
+- api : Regroupe les handlers ainsi que la table de routage.
+- auth : Mise en place de la gestion de connexion utilisateur par le biais du JWT.
+- db : Procéssus de connexion à la database.
+- entities : Déclaration des Objets "`User`", "`Video`" et "`Comment`".
+- extra : Comporte seulement les différentes images pour réaliser le readme.
+- migration : Se compose de tous les fichiers de migrations généré par "`SeaORM`".
+- queries : Regroupe toutes les requêttes sql utiliser pour les handlers présent dans `api`.
+- src : Base qui regroupe toutes les librairies et qui permet de lancer le projet.
+- target : Ce dossier contient les éléments nécesaires au build ainsi que le fichier éxécutable.
+- .dockerignore : Permet à docker d'ignorer les fichiers renseigés.
+- .gitignore : permet d'ignorer des fichiers lors de lutilisation de git.
+- cargo.lock :  
+
+### Gestion des ressources
+
 Afin de rendre le projet moins gourmand en espace, j'ai adapté l'importation des différentes librairies tel que Salvo, Tokio & SeaORM par exemple afin qu'il soit commun à tous les dossiers du projet.
 
 On peut voir dans le fichier cargo.toml :
