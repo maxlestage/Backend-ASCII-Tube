@@ -7,7 +7,7 @@
 
 ## Introduction
 
-Ce projet écrit en Rust vient s'interfacer à une api écrite en python qui permet de convertir des vidéos en ASCII Art, par la même occasion le serveur présenté fournit des réponses et un routing complet à l'api front réalisée en React.
+Ce projet, écrit en Rust, vient s'interfacer à une API écrite en Python qui permet de convertir des vidéos en ASCII Art. Par la même occasion, le serveur présenté fournit des réponses et un routage complet à l'API front réalisée en React.
 
 Dans le cadre de notre projet, le choix de Rust comme langage de programmation pour le développement d'un backend complet était donc évident. En plus de nous permettre de gérer des flux de données importants de manière efficace, Rust nous permet également de concevoir des solutions robustes et fiables, capables de supporter des charges importantes.
 
@@ -56,7 +56,7 @@ Une fois que vous avez installé le projet, vous pouvez l'exécuter en utilisant
 cargo run
 ```
 
-Cela va démarrer le serveur Web sur le port `7878`. Vous pouvez maintenant accéder à l'API en ouvrant votre navigateur à l'adresse <http://0.0.0.0:7878>.
+Cela va démarrer le serveur Web sur le port 7878. Vous pouvez maintenant accéder à l'API en ouvrant votre navigateur à l'adresse <http://0.0.0.0:7878>.
 
 ---
 
@@ -64,7 +64,7 @@ Cela va démarrer le serveur Web sur le port `7878`. Vous pouvez maintenant acc�
 
 ### À Propos de l'architecture du Backend écrit en Rust
 
-Le projet est struturé de manière à être modulable, chacun des dossiers représente une librairie.
+Le projet est structuré de manière à être modulable, chacun des dossiers représente une bibliothèque.
 
 ![CodoMatonArchiProjet](extra/archi_projet.png)
 
