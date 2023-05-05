@@ -1,7 +1,7 @@
 use crate::upload::upload;
 use auth::jwt_auth::JwtClaims;
-use base64::Engine;
 use base64::engine::general_purpose;
+use base64::Engine;
 use db::db_connection::db_connection;
 use entities::user::UserOmitMP;
 use entities::{comment, video};
@@ -9,7 +9,8 @@ use queries::coment_service::{delete_comment_by_id, get_comment_by_video_id, ins
 use queries::structs::{Comment, User};
 use queries::user_service::*;
 use queries::video_service::{
-    converter_ascii, create_video, delete_video_by_id, get_video_by_id, set_path_to_json, get_videos
+    converter_ascii, create_video, delete_video_by_id, get_video_by_id, get_videos,
+    set_path_to_json,
 };
 use salvo::http::StatusCode;
 use salvo::{handler, prelude::*};
@@ -117,12 +118,12 @@ pub async fn get_video(req: &mut Request, res: &mut Response) {
         let video_data = video.unwrap();
         let contents = fs::read_to_string(video_data.clone().path_to_json + "/Style.LIGHT.json")
             .expect("file not found");
-        
-        let sound = fs::read(video_data.clone().path_to_json + "/sound.mp3")
-            .expect("file not found");
+
+        let sound =
+            fs::read(video_data.clone().path_to_json + "/sound.mp3").expect("file not found");
         let base64_sound = format!("{}", general_purpose::STANDARD.encode(&sound));
-        
-        let video_with_content = video::VideoWithContent{
+
+        let video_with_content = video::VideoWithContent {
             id: video_data.id,
             user_id: video_data.user_id,
             title: video_data.title,
@@ -130,7 +131,7 @@ pub async fn get_video(req: &mut Request, res: &mut Response) {
             date: video_data.date,
             path_to_json: video_data.path_to_json,
             content: contents,
-            sound: base64_sound
+            sound: base64_sound,
         };
 
         res.render(Json(video_with_content));
