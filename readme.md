@@ -20,7 +20,10 @@ Ce projet est destiné à être utilisé en conjonction avec le projet Dev B3 Fr
 
 ## Schéma Base de Donnée
 
+<div align="center">
 ![CodoMatonBanner](extra/db.png)
+<img src="extra/db.png">
+</div>
 
 ---
 
