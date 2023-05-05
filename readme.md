@@ -1,5 +1,5 @@
 
-# Vidéo to ASCII Art by Codo'Maton
+# Videos to ASCII Art by Codo'Maton
 
 ![CodoMaton](extra/banner.jpg)
 
