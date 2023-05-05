@@ -9,11 +9,12 @@ Ce projet est destiné à être utilisé en conjonction avec le projet Dev B3 Fr
 
 <br/>
 <div align="center">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Rust_programming_language_black_logo.svg/2048px-Rust_programming_language_black_logo.svg.png" width = "100" style="margin-right:65px;">
-<img src="https://www.sea-ql.org/SeaORM/img/SeaORM%20logo.png" width = "100" style="margin-right:65px;">
-<img src="https://avatars.githubusercontent.com/u/77909452?v=4" width = "100" style="margin-right:65px;">
-<img src="https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png" width = "100" style="margin-right:65px;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Rust_programming_language_black_logo.svg/2048px-Rust_programming_language_black_logo.svg.png" width="100" style="margin: 0px 60px;">
+  <img src="https://www.sea-ql.org/SeaORM/img/SeaORM%20logo.png" width="100" style="margin: 0px 60px;">
+  <img src="https://avatars.githubusercontent.com/u/77909452?v=4" width="100" style="margin: 0px 60px;">
+  <img src="https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png" width="100" style="margin: 0px 60px;">
 </div>
+
 <br/>
 
 ---
