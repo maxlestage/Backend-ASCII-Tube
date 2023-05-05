@@ -1,7 +1,7 @@
 
 # Videos to ASCII Art by Codo'Maton
 
-![CodoMaton](extra/banner.jpg)
+![CodoMatonBanner](extra/banner.jpg)
 
 Ce projet est destiné à être utilisé en conjonction avec le projet Dev B3 Front pour fournir une application Web complète.
 
@@ -33,6 +33,8 @@ Cela va démarrer le serveur Web sur le port `7878`. Vous pouvez maintenant acc�
 ### À Propos l'architecture du Backend écrit en Rust
 
 Le projet est struturé de manière à être modulable, chacun des dossiers représente une librairie.
+
+![CodoMatonArchiProjet](extra/archi_projet.png)
 
 Afin de rendre le projet moins gourmand en espace, j'ai adapté l'importation des différentes librairies tel que Salvo, Tokio & SeaORM par exemple afin qu'il soit commun à tous les dossiers du projet.
 
