@@ -95,7 +95,7 @@ serde_json = {workspace = true }
 bcrypt = {workspace = true }
 ```
 
-On visualise que les dépendances sont partagées
+On visualise que les dépendances sont partagées.
 
 ---
 
