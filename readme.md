@@ -193,6 +193,10 @@ DELETE : api/comment/<video_id>/<id>
 
 ---
 
+## Présentation du projet
+
+[Support de présentation pdf](extra/Projet_B3_Slides-2.pdf)
+
 ## Contributeurs
 
 - Levee Dorian : dorianlevee30(at)gmail(dot)com
