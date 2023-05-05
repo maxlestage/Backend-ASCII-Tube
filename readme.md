@@ -3,7 +3,17 @@
 
 ![CodoMatonBanner](extra/banner.jpg)
 
-Ce projet écrit vient s'interfacer à une api écrite en python qui permet de convertir des vidéos en ASCII Art, par la même occasion le serveur présenté fournit des réponses et un routing complet à l'api front réalisée en React.
+---
+
+## Introduction
+
+Ce projet écrit en Rust vient s'interfacer à une api écrite en python qui permet de convertir des vidéos en ASCII Art, par la même occasion le serveur présenté fournit des réponses et un routing complet à l'api front réalisée en React.
+
+Dans le cadre de notre projet, le choix de Rust comme langage de programmation pour le développement d'un backend complet était donc évident. En plus de nous permettre de gérer des flux de données importants de manière efficace, Rust nous permet également de concevoir des solutions robustes et fiables, capables de supporter des charges importantes.
+
+En outre, ce choix s'inscrit dans une démarche de montée en compétence sur ce langage, qui est de plus en plus populaire dans le domaine du développement web. Grâce à ce projet, nous avons donc pu approfondir nos connaissances en Rust.
+
+---
 
 ## Technologies utilisées
 
