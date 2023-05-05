@@ -48,6 +48,11 @@ Le projet est struturé de manière à être modulable, chacun des dossiers repr
 - .dockerignore : Permet à docker d'ignorer les fichiers renseigés.
 - .gitignore : Permet d'ignorer des fichiers lors de lutilisation de git.
 - cargo.lock : Généré automatiquement par le système de construction. Il sert à garantir l'éxactitude des dépendances sont utilisées lors de la construction de l'application ou de la bibliothèque à chaque fois, quel que soit l'environnement de compilation.
+- Cargo.toml : Fichier de configuration de Rust utilisé par le système de construction Cargo pour définir les métadonnées du package, les dépendances du projet et les options de compilation.
+- docker-compose.yml : docker-compose.yml : Fichier de configuration utilisé par Docker Compose pour définir plusieurs conteneurs Docker qui fonctionnent ensemble dans une application.
+- dockerfile : Fichier texte qui contient les instructions pour la création d'une image Docker personnalisée.
+- init-database.sh : Script d'initialisation de base de données, souvent utilisé pour configurer une base de données dans un conteneur Docker.
+- readme.md : Fichier texte contenant les informations sur le projet, les instructions d'utilisation et d'installation, la documentation, les notes de version, etc.
 
 ### Gestion des ressources
 
