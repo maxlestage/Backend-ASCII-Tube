@@ -79,6 +79,76 @@ On visualise que les dépendances sont partagées
 
 ## API
 
+Listes des routes :
+
+### Utilisateur
+
+- Création d'un compte :
+
+```http
+POST : api/signup
+```
+
+- Se connecter à partir d'un compte existant :
+
+```http
+POST : api/login
+```
+
+- Visualiser le compte d'un utilisateur via son id :
+
+ ```http
+GET : api/user/<id>
+```
+
+### Vidéos
+
+- Lister toutes les vidéos :
+
+ ```http
+GET : api/videos
+```
+
+- Visualiser une vidéo via son id :
+
+ ```http
+GET : api/video/<id>
+```
+
+- Supprimer une vidéo via son id :
+
+ ```http
+DELETE : api/video/<id>
+```
+
+- Poster une vidéo :
+
+ ```http
+POST : api/video/upload
+```
+
+### Commentaires
+
+- Visualiser le commentaire d'une vidéo à partir de son id :
+
+ ```http
+GET : api/comment/<video_id>
+```
+
+- Ajouter un commentaire sur une vidéo en utilisant l'id de la vidéo :
+
+ ```http
+POST : api/comment/<video_id>
+```
+
+- Supprimer le commentaire d'une vidéo à partir de l'id de la vidéo et l'id du commentaire :
+
+ ```http
+DELETE : api/comment/<video_id>/<id>
+```
+
+---
+
 ## Contributeurs
 
 - Dorian Levee <dorianlevee30@gmail.com>
