@@ -1,5 +1,5 @@
 
-# Projet Dev B3 Back
+# Vidéo to ASCII Art by Codo'Maton
 
 ![CodoMaton](extra/banner.jpg)
 
