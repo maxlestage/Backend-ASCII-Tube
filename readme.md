@@ -195,7 +195,21 @@ DELETE : api/comment/<video_id>/<id>
 
 ## Présentation du projet
 
-[Support de présentation pdf](extra/Projet_B3_Slides-2.pdf)
+<div align="center">
+<img src="extra/slide-1.jpg">
+<img src="extra/slide-2.jpg">
+<img src="extra/slide-3.jpg">
+<img src="extra/slide-4.jpg">
+<img src="extra/slide-5.jpg">
+<img src="extra/slide-6.jpg">
+<img src="extra/slide-7.jpg">
+<img src="extra/slide-8.jpg">
+<img src="extra/slide-9.jpg">
+<img src="extra/slide-10.jpg">
+<img src="extra/slide-11.jpg">
+</div>
+
+---
 
 ## Contributeurs
 
