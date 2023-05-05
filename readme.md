@@ -12,6 +12,7 @@ Pour installer ce projet, vous devez disposer de Rust et de Cargo installés sur
 ```bash
 git clone https://gitlab.com/dorianlevee30/project-dev-b3-back.git
 cd project-dev-b3-back
+docker compose up
 cargo build
 ```
 
