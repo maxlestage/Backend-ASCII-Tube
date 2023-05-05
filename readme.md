@@ -67,7 +67,7 @@ On peut voir dans le fichier cargo.toml :
 members = [".", "api", "db", "migration", "queries", "auth"]
 ```
 
-En définissant le workspace aisni, il est donc possible de partager les librairies suivantes au sein du projet :
+En définissant le workspace ainsi, il est donc possible de partager les librairies suivantes au sein du projet :
 
  ```toml
 [workspace.dependencies]
