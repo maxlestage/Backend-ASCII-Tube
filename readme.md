@@ -3,7 +3,7 @@
 
 ![CodoMatonBanner](extra/banner.jpg)
 
-Ce projet est destiné à être utilisé en conjonction avec le projet Dev B3 Front pour fournir une application Web complète.
+Ce projet écrit vient s'interfacer à une api écrite en python qui permet de convertir des vidéos en ASCII Art, par la même occasion le serveur présenté fournit des réponses et un routing complet à l'api front réalisée en React.
 
 ## Technologies utilisées
 
