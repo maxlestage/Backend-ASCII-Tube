@@ -193,9 +193,9 @@ DELETE : api/comment/<video_id>/<id>
 
 ## Contributeurs
 
-- Levee Dorian : `dorianlevee30(at)gmail(dot)com`
-- Lestage Maxime : `maxime.lestage(at)ynov(dot)com`
-- Rojoa Azad : `azad.rojoa(at)ynov(dot)com`
-- Tarendeau Gaël `gael.tarendeau(at)ynov(dot)com`
+- Levee Dorian : dorianlevee30(at)gmail(dot)com
+- Lestage Maxime : maxime.lestage(at)ynov(dot)com
+- Rojoa Azad : azad.rojoa(at)ynov(dot)com
+- Tarendeau Gaël gael.tarendeau(at)ynov(dot)com
 
 N'hésitez pas à envoyer un e-mail si vous avez des questions ou des commentaires sur ce projet.
