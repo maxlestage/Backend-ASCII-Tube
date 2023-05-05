@@ -17,6 +17,14 @@ Ce projet est destiné à être utilisé en conjonction avec le projet Dev B3 Fr
 </div>
 <br/>
 
+---
+
+## Schéma Base de Donnée
+
+![CodoMatonBanner](extra/db.png)
+
+---
+
 ## Installation
 
 Pour installer ce projet, vous devez disposer de Rust et de Cargo installés sur votre système. Ensuite, vous pouvez cloner le dépôt et installer les dépendances en exécutant les commandes suivantes :
