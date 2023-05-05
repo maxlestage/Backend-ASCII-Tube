@@ -50,7 +50,7 @@ Cela va démarrer le serveur Web sur le port `7878`. Vous pouvez maintenant acc�
 
 ## Architecture
 
-### À Propos l'architecture du Backend écrit en Rust
+### À Propos de l'architecture du Backend écrit en Rust
 
 Le projet est struturé de manière à être modulable, chacun des dossiers représente une librairie.
 
