@@ -1,7 +1,7 @@
 
 # Projet Dev B3 Back
 
-![CodoMaton](https://gitlab.com/dorianlevee30/project-dev-b3-back/-/blob/main/extra/CodomatonLogo.png)
+![CodoMaton](extra/CodomatonLogo.png)
 
 Ce projet est destiné à être utilisé en conjonction avec le projet Dev B3 Front pour fournir une application Web complète.
 
