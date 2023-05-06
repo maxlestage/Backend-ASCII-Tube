@@ -42,10 +42,14 @@ En outre, ce choix s'inscrit dans une démarche de montée en compétence sur ce
 Pour installer ce projet, vous devez disposer de Rust et de Cargo installés sur votre système. Ensuite, vous pouvez cloner le dépôt et installer les dépendances en exécutant les commandes suivantes :
 
 ```bash
-git clone https://gitlab.com/dorianlevee30/project-dev-b3-back.git
-cd project-dev-b3-back
-docker compose up
-cargo build
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+```bash
+  git clone https://gitlab.com/dorianlevee30/project-dev-b3-back.git
+  cd project-dev-b3-back
+  docker compose up
+  cargo build
 ```
 
 ## Utilisation
@@ -53,7 +57,7 @@ cargo build
 Une fois que vous avez installé le projet, vous pouvez l'exécuter en utilisant la commande suivante :
 
 ```bash
-cargo run
+  cargo run
 ```
 
 Cela va démarrer le serveur Web sur le port 7878. Vous pouvez maintenant accéder à l'API en ouvrant votre navigateur à l'adresse <http://0.0.0.0:7878>.
